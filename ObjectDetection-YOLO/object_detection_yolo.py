@@ -12,8 +12,8 @@ import os.path
 # Initialize the parameters
 confThreshold = 0.5  #Confidence threshold
 nmsThreshold = 0.4   #Non-maximum suppression threshold
-inpWidth = 416       #Width of network's input image
-inpHeight = 416      #Height of network's input image
+inpWidth = 128       #Width of network's input image
+inpHeight = 128      #Height of network's input image
 
 parser = argparse.ArgumentParser(description='Object Detection using YOLO in OPENCV')
 parser.add_argument('--image', help='Path to image file.')
@@ -99,7 +99,7 @@ def postprocess(frame, outs):
 
 # Process inputs
 winName = 'Deep learning object detection in OpenCV'
-cv.namedWindow(winName, cv.WINDOW_NORMAL)
+#cv.namedWindow(winName, cv.WINDOW_NORMAL)
 
 outputFile = "yolo_out_py.avi"
 if (args.image):
@@ -153,8 +153,9 @@ while cv.waitKey(1) < 0:
     # Put efficiency information. The function getPerfProfile returns the overall time for inference(t) and the timings for each of the layers(in layersTimes)
     t, _ = net.getPerfProfile()
     label = 'Inference time: %.2f ms' % (t * 1000.0 / cv.getTickFrequency())
-    cv.putText(frame, label, (0, 15), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255))
-
+    print(label)
+    #cv.putText(frame, label, (0, 15), cv.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255))
+'''
     # Write the frame with the detection boxes
     if (args.image):
         cv.imwrite(outputFile, frame.astype(np.uint8))
@@ -162,4 +163,4 @@ while cv.waitKey(1) < 0:
         vid_writer.write(frame.astype(np.uint8))
 
     cv.imshow(winName, frame)
-
+'''
